@@ -1,0 +1,19 @@
+Superuser added:
+Id: 00d80691-790a-4430-8504-9ece5ffc4ff3
+Username: superadmin
+Email: superadmin@example.com
+Role: admin
+Password: 5003fa39f25045048fbf0b9e77d852a8
+
+
+
+
+1. R1-A2 cell issue - 30 min
+--2. Code stop - 15 min
+3. Delete All - 60 min
+4. Import Data option - 200 min
+5. Menu Collapse option - 60 min
+--6. Page row limit - 15 min
+--7. sorting - 15 min
+8. QR code plublic link - 200 min
+9. Row QR code - 60 min
