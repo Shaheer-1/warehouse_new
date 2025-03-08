@@ -15,10 +15,10 @@
 <?php $this->end(); ?>
 <?php $this->assign('tb_sidebar', '<ul class="nav flex-column">' . $this->fetch('tb_actions') . '</ul>'); ?>
 
-<table data-order='[[ 1, "asc" ]]' id="example" class="display table table-striped">
+<table id="example" class="table table-striped" style="width:100%">
     <thead>
     <tr>
-        <th></th>
+        <!-- <th></th> -->
         <!-- <th scope="col"><?= $this->Paginator->sort('id') ?></th> -->
         <th scope="col"><?= $this->Paginator->sort('rack_row_id', 'ROWS') ?></th>
         <th scope="col"><?= $this->Paginator->sort('cell_code', 'CELL NAME') ?></th>
@@ -55,8 +55,8 @@
                     $url = $this->Url->build($this->getRequest()->getPath(), ['fullBase' => true]).'/cellinfo/'.$cell->id;
                 ?>
             <tr>
-                <td>
-                </td>
+                <!-- <td>
+                </td> -->
                 <!-- <td><?= h($cell->id) ?></td> -->
                 <td><?= $cell->hasValue('rack_row') ? 
                     $this->Html->link($cell->rack_row->row_code, ['controller' => 'RackRows', 'action' => 'view', $cell->rack_row->id]) : '' 
@@ -110,7 +110,7 @@
             }else{
             ?>
             <tr>
-                <td></td>
+                <!-- <td></td> -->
                 <td><?= $cell->hasValue('rack_row') ? 
                     $this->Html->link($cell->rack_row->row_code, ['controller' => 'RackRows', 'action' => 'view', $cell->rack_row->id]) : '' 
                 ?></td>

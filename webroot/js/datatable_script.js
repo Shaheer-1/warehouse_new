@@ -1,11 +1,12 @@
+
 new DataTable('#example', {
-    select: true,
+    order: [[1, 'asc']],
     layout: {
         topStart: {
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print'],
+            buttons: ['copy', 'excel', 'pdf', 'print'],
             pageLength: {
-                menu: [10, 25, 50, 100]
-            },
-        },
-    },
+                menu: [10, 25, 50, 100, 200]
+            }
+        }
+    }
 });

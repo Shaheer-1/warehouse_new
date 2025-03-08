@@ -7,36 +7,102 @@ use Cake\Core\Configure;
 
 $this->Html->script([
     'https://code.jquery.com/jquery-3.7.1.js',
+    'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.bundle.min.js',
     'https://cdn.datatables.net/2.2.2/js/dataTables.js',
+    'https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js',
+    
     'https://cdn.datatables.net/buttons/3.2.2/js/dataTables.buttons.js',
-    'https://cdn.datatables.net/buttons/3.2.2/js/buttons.dataTables.js',
+    'https://cdn.datatables.net/buttons/3.2.2/js/buttons.bootstrap5.js',
     'https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js',
     'https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js',
     'https://cdn.datatables.net/buttons/3.2.2/js/buttons.html5.min.js',
     'https://cdn.datatables.net/buttons/3.2.2/js/buttons.print.min.js',
 
-    'https://cdn.datatables.net/2.2.2/js/dataTables.bootstrap5.js',
-    'https://cdn.datatables.net/buttons/2.4.1/js/buttons.html5.min.js',
-    'https://cdn.datatables.net/select/3.0.0/js/dataTables.select.js',
-    'https://cdn.datatables.net/select/3.0.0/js/select.dataTables.js',
+
     ],['block' => true]);
 
-$this->Html->script('datatable_script', ['block' => true]);
+$this->Html->script([
+        'datatable_script',
+        'BootstrapUI.sidebars',
+        'virtual-select.min',
+    ], ['block' => true]);
 
 $this->Html->css([
-        'https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.css',
-        'https://cdn.datatables.net/buttons/3.2.2/css/buttons.dataTables.css',
-        'https://cdn.datatables.net/2.2.2/css/dataTables.dataTables.css',
-        'https://cdn.datatables.net/select/3.0.0/css/select.dataTables.css',
+    'https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css',
+    'https://cdn.datatables.net/2.2.2/css/dataTables.bootstrap5.css',
+    'https://cdn.datatables.net/buttons/3.2.2/css/buttons.bootstrap5.css',
+
     ],['block' => true]);
-$this->Html->css('BootstrapUI.dashboard', ['block' => true]);
+$this->Html->css([
+        'BootstrapUI.dashboard',
+        'virtual-select.min',
+        'BootstrapUI.sidebar',
+    ], ['block' => true]);
 $this->prepend(
     'tb_body_attrs',
     ' class="' .
         implode(' ', [h($this->request->getParam('controller')), h($this->request->getParam('action'))]) .
         '" '
 );
+$this->start('tb_sidebar');
+?>
+
+<div class="body_main">
+    <div class="sidebar_main">
+        <div class="flex-shrink-0 p-3">
+            <ul class="list-unstyled ps-0">
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#rows-collapse" aria-expanded="false">
+                Rows
+                </button>
+                <div class="collapse" id="rows-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><?= $this->Html->link(__('New Row'), ['controller' => 'RackRows', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+                    <li><?= $this->Html->link(__('List Rows'), ['controller' => 'RackRows', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+                </ul>
+                </div>
+            </li>
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#cells-collapse" aria-expanded="false">
+                Cells
+                </button>
+                <div class="collapse" id="cells-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><?= $this->Html->link(__('New Cell'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
+                    <li><?= $this->Html->link(__('List Cells'), ['action' => 'index'], ['class' => 'nav-link']) ?></li>
+                </ul>
+                </div>
+            </li>
+            <li class="border-top my-3"></li>
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#principals-collapse" aria-expanded="false">
+                Principals
+                </button>
+                <div class="collapse" id="principals-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><?= $this->Html->link(__('New Principal'), ['controller' => 'Principals', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+                    <li><?= $this->Html->link(__('List Principals'), ['controller' => 'Principals', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+                </ul>
+                </div>
+            </li>
+            <li class="mb-1">
+                <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#products-collapse" aria-expanded="false">
+                Products
+                </button>
+                <div class="collapse" id="products-collapse">
+                <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                    <li><?= $this->Html->link(__('New Product'), ['controller' => 'Products', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+                    <li><?= $this->Html->link(__('List Products'), ['controller' => 'Products', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+                </ul>
+                </div>
+            </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<?php
+$this->end();
 $this->start('tb_body_start');
 ?>
 <body <?= $this->fetch('tb_body_attrs') ?>>
@@ -63,7 +129,7 @@ $this->start('tb_body_start');
 
     <div class="container-fluid">
         <div class="row">
-            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse" style="">
+            <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
                 <div class="position-sticky pt-3">
                     <?= $this->fetch('tb_sidebar') ?>
                 </div>
@@ -97,3 +163,4 @@ $this->start('tb_body_end');
 $this->end();
 
 echo $this->fetch('content');
+?>

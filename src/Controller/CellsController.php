@@ -25,14 +25,12 @@ class CellsController extends AppController
     public function index()
     {
         $query = $this->Cells
-        ->find('all')
+        ->find()
         ->contain([
             'RackRows',
             'Products'=> ['Principals']
         ]);
-        // ->leftJoinWith('Products');
         $cells = $this->paginate($query);
-        // pr($cells);exit;
         $this->set(compact('cells'));
     }
 
@@ -68,6 +66,8 @@ class CellsController extends AppController
     public function add()
     {
         if ($this->request->is('post')) {
+            $cellCount = 0;
+            $productCount = 0;
             foreach ($this->request->getData()['cell_code'] as $key => $value) {
                 $cell = $this->Cells->newEmptyEntity();
                 
@@ -96,6 +96,7 @@ class CellsController extends AppController
                 ]);
                 
                 if ($this->Cells->save($cell)) {
+                    $cellCount++;
                     $id = $this->Cells->Products->find('list', valueField: 'id')
                     ->where(['Products.sku' => trim($dataSet['sku'])])
                     ->first();
@@ -107,12 +108,13 @@ class CellsController extends AppController
                         $product = $this->Cells->Products->newEmptyEntity();
                         $product = $this->Cells->Products->patchEntity($product,$dataSet['products']);
                         if($this->Cells->Products->save($product)){
+                            $productCount++;
                         }
                     }
                     $this->Cells->Products->link($cell,[
                         $product
                     ]);
-                    $this->Flash->success(__('The cell has been saved with products.'));
+                    // $this->Flash->success(__('The cell has been saved with products.'));
                 }
                 else{
                     $id = $this->Cells->Products->find('list', valueField: 'id')
@@ -131,18 +133,16 @@ class CellsController extends AppController
                         $product = $this->Cells->Products->patchEntity($product,$dataSet['products']);
                         
                         if($this->Cells->Products->save($product)){
-                            $this->Cells->Products->link($cell,[
-                                $product
-                            ]);
-                            $this->Flash->success(__('The cell has been saved with products.'));
+                            $productCount++;
                         }
                     }
                     $this->Cells->Products->link($cell,[
                         $product
                     ]);
-                    $this->Flash->error(__('The cell could not be saved. Please, try again.'));
                 }
             }
+            $message = "While processing ".($key+1)." records, ".$cellCount." new cell(s) and ".$productCount." new product(s) are added.";
+            $this->Flash->error($message);
             return $this->redirect(['action' => 'index']);
         }
         else{

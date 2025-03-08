@@ -28,8 +28,18 @@
         <?php
             echo $this->Form->control('rack_row_id', ['options' => $rackRows]);
             echo $this->Form->control('cell_code');
-            echo $this->Form->control('products._ids', ['options' => $products]);
+            echo $this->Form->control(
+                'products._ids',
+                [
+                    'options' => $products,
+                ]
+            );
                 ?>
+                <select id="example-select" multiple name="native-select" placeholder="Native Select" data-search="false" data-silent-initial-value-set="true">
+                    <option value="1" disabled>Option 1</option>
+                    <option value="2">Option 2</option>
+                    <option value="3" selected>Option 3</option>
+                </select>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>
