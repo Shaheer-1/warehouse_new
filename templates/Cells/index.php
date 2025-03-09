@@ -36,7 +36,7 @@
         <?php //pr($cells);exit; ?>
         <?php foreach ($cells as $cell) : ?>
             <?php $info = '';
-            $modalInfo = h($cell->rack_row->row_code)." - ".h($cell->cell_code);
+            $modalInfo = h($cell->cell_code);
             foreach ($cell->products as $key => $value) { 
                 $info .= ++$key.") ".
                 h($cell->cell_code).
@@ -155,8 +155,12 @@
     <div class="modal-content">
         <span class="close" onclick="closeModal()">&times;</span>
         <div id="printableContent">
-            <h3 id="modal_h"><?= $cell->rack_row->row_code." - ".$cell->cell_code ?></h3>
-            <div id="qrcode" style="width: 300px; margin: 0 auto; padding: 10px; text-align: center;"></div>
+            <div>
+                <h3 id="modal_h"><?= $cell->cell_code ?></h3>
+            </div>
+            <div id="qrcode" style="width: 300px; margin: 0 auto; padding: 10px; text-align: center;">
+
+            </div>
         </div>
         <button onclick="printModalContent()" class="btn btn-outline-primary">Print</button>
     </div>

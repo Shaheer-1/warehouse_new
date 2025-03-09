@@ -1,5 +1,5 @@
+document.addEventListener('DOMContentLoaded', function () {
     VirtualSelect.init({
-        ele: '#example-select',
-        options: myOptions,
-        multiple: true
-      });
+            ele: '#Products',
+          });
+});

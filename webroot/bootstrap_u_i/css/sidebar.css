@@ -102,3 +102,12 @@ sidebar_main {
   }
 }
 
+#Products{
+  max-width: 100%;
+  width: 100%;
+}
+
+.vscomp-toggle-button{
+  border-radius: 5px;
+  padding: 10px 30px 10px 10px;
+}

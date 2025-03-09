@@ -35,8 +35,8 @@ $this->Html->css([
 
     ],['block' => true]);
 $this->Html->css([
-        'BootstrapUI.dashboard',
         'virtual-select.min',
+        'BootstrapUI.dashboard',
         'BootstrapUI.sidebar',
     ], ['block' => true]);
 $this->prepend(

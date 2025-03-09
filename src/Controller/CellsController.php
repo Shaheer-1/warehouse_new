@@ -13,9 +13,13 @@ namespace App\Controller;
  */
 class CellsController extends AppController
 {
+    // protected array $paginate = [
+    //     'maxLimit' => 1000
+    // ];
     public function initialize(): void
     {
         parent::initialize();
+        // $this->loadComponent('Paginator');
     }
     /**
      * Index method
@@ -30,7 +34,10 @@ class CellsController extends AppController
             'RackRows',
             'Products'=> ['Principals']
         ]);
-        $cells = $this->paginate($query);
+
+        $cells = $this->paginate($query, [
+            'limit' => 1000, // Set your limit here
+        ]);
         $this->set(compact('cells'));
     }
 
@@ -142,7 +149,7 @@ class CellsController extends AppController
                 }
             }
             $message = "While processing ".($key+1)." records, ".$cellCount." new cell(s) and ".$productCount." new product(s) are added.";
-            $this->Flash->error($message);
+            $this->Flash->success($message);
             return $this->redirect(['action' => 'index']);
         }
         else{
@@ -167,7 +174,9 @@ class CellsController extends AppController
             'Products','RackRows'
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
-            $cell = $this->Cells->patchEntity($cell, $this->request->getData());
+            $dataSet = $this->request->getData();
+            $dataSet['products']['_ids'] = explode(",",$this->request->getData()['Products']);
+            $cell = $this->Cells->patchEntity($cell, $dataSet);
             $cell->is_edit = 'edit';
             if ($this->Cells->save($cell)) {
                 $this->Flash->success(__('The cell has been saved.'));
