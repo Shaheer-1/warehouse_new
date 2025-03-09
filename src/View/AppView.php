@@ -40,5 +40,7 @@ class AppView extends UIView
         parent::initialize();
         $this->loadHelper('QrCode.QrCode');
         // $this->loadHelper('QrCode');
+        $this->loadHelper('CakeDC/Users.AuthLink');
+        $this->loadHelper('CakeDC/Users.User');
     }
 }

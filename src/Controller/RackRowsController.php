@@ -36,6 +36,13 @@ class RackRowsController extends AppController
         ]);
         $this->set(compact('rackRow'));
     }
+    public function rowinfo($id = null)
+    {
+        $rackRow = $this->RackRows->get($id, contain: [
+            'Cells'
+        ]);
+        $this->set(compact('rackRow'));
+    }
 
     /**
      * Add method

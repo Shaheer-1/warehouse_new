@@ -4,10 +4,22 @@
  * @var \App\Model\Entity\Cell $cell
  */
 ?>
-<?php $this->extend('/layout/TwitterBootstrap/dashboard'); ?>
-<!-- Cell name - Principal-ku-product -->
+<?php $this->extend('/layout/TwitterBootstrap/signin'); ?>
+
+<?php $this->start('tb_actions'); ?>
+<li><?= $this->Html->link(__('Edit Cell'), ['action' => 'edit', $cell->id], ['class' => 'nav-link']) ?></li>
+<li><?= $this->Form->postLink(__('Delete Cell'), ['action' => 'delete', $cell->id], ['confirm' => __('Are you sure you want to delete # {0}?', $cell->id), 'class' => 'nav-link']) ?></li>
+<li><?= $this->Html->link(__('List Cells'), ['action' => 'index'], ['class' => 'nav-link']) ?> </li>
+<li><?= $this->Html->link(__('New Cell'), ['action' => 'add'], ['class' => 'nav-link']) ?> </li>
+<li><?= $this->Html->link(__('List Rack Rows'), ['controller' => 'RackRows', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+<li><?= $this->Html->link(__('New Rack Row'), ['controller' => 'RackRows', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+<li><?= $this->Html->link(__('List Products'), ['controller' => 'Products', 'action' => 'index'], ['class' => 'nav-link']) ?></li>
+<li><?= $this->Html->link(__('New Product'), ['controller' => 'Products', 'action' => 'add'], ['class' => 'nav-link']) ?></li>
+<?php $this->end(); ?>
+<?php $this->assign('tb_sidebar', '<ul class="nav flex-column">' . $this->fetch('tb_actions') . '</ul>'); ?>
+
 <div class="cells view large-9 medium-8 columns content">
-    <!-- <h3><?= h($cell->cell_code) ?></h3> -->
+    <h3><?= h($cell->cell_code) ?></h3>
     <div class="table-responsive">
         <table class="table table-striped">
             <!-- <tr>
@@ -18,47 +30,40 @@
             // pr($cell);exit;
             ?>
             <tr>
-                <th class="col-md-2" scope="row"><?= __('ROW :') ?></th>
-                <td><?= $cell->hasValue('rack_row') ? $this->Html->link($cell->rack_row->row_code, ['controller' => 'RackRows', 'action' => 'view', $cell->rack_row->id]) : '' ?></td>
+                <th scope="row"><?= __('Row') ?></th>
+                <td><?= $cell->hasValue('rack_row') ? $cell->rack_row->row_code : '' ?></td>
             </tr>
             <tr>
-                <th scope="row"><?= __('CELL NAME :') ?></th>
-                <td><?= h($cell->cell_code) ?></td>
-            </tr>
-            <!-- <tr>
                 <th scope="row"><?= __('Created') ?></th>
                 <td><?= h($cell->created) ?></td>
             </tr>
             <tr>
                 <th scope="row"><?= __('Modified') ?></th>
                 <td><?= h($cell->modified) ?></td>
-            </tr> -->
+            </tr>
         </table>
     </div>
-    <?php
-    // pr($cell);exit;
-    ?>
     <div class="related">
         <h4><?= __('Related Products') ?></h4>
         <?php if (!empty($cell->products)): ?>
         <div class="table-responsive">
             <table class="table table-striped">
                 <tr>
-                    <th scope="col"><?= __('No.') ?></th>
-                    <th scope="col"><?= __('Principal') ?></th>
+                    <!-- <th scope="col"><?= __('Id') ?></th> -->
+                    <!-- <th scope="col"><?= __('Principal Id') ?></th> -->
                     <th scope="col"><?= __('Sku') ?></th>
                     <th scope="col"><?= __('Product Details') ?></th>
-                    <!-- <th scope="col"><?= __('Created') ?></th> -->
+                    <th scope="col"><?= __('Created') ?></th>
                     <th scope="col"><?= __('Modified') ?></th>
                 </tr>
-                <?php foreach ($cell->products as $key => $products): ?>
+                <?php foreach ($cell->products as $products): ?>
                 <tr>
-                    <td><?= ++$key ?></td>
-                    <td><?= h($products->principal->principal_name) ?></td>
+                    <!-- <td><?= h($products->id) ?></td> -->
+                    <!-- <td><?= h($products->principal_id) ?></td> -->
                     <td><?= h($products->sku) ?></td>
-                    <td><?= h($products->principal->principal_name)." ".h($products->product_details) ?></td>
-                    <!-- <td><?= h($products->created) ?></td> -->
-                    <td><?= h($products->modified) ?></td>
+                    <td><?= h($products->product_details) ?></td>
+                    <td><?= h($products->created) ?></td>
+                    <td><?= h($products->modified) ?></td>                    
                 </tr>
                 <?php endforeach; ?>
             </table>
