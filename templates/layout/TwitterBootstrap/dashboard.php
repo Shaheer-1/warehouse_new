@@ -69,8 +69,8 @@ $this->start('tb_sidebar');
                 </button>
                 <div class="collapse" id="cells-collapse">
                 <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
-                    <li><?= $this->Html->link(__('New Cell'), ['action' => 'add'], ['class' => 'nav-link']) ?></li>
-                    <li><?= $this->Html->link(__('List Cells'), ['action' => 'index'], ['class' => 'nav-link']) ?></li>
+                    <li><?= $this->Html->link(__('New Cell'), ['controller' => 'Cells','action' => 'add'], ['class' => 'nav-link']) ?></li>
+                    <li><?= $this->Html->link(__('List Cells'), ['controller' => 'Cells','action' => 'index'], ['class' => 'nav-link']) ?></li>
                 </ul>
                 </div>
             </li>
