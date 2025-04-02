@@ -21,18 +21,18 @@
 <div class="cells form content">
     <?= $this->Form->create($cell) ?>
     <?php
-    $options = '';
-    foreach ($products as $key => $value) {
-        # code...
-        $selected = '';
-        foreach($cell['products'] as $k => $v){
-            if($v['id'] == $key){
-                $selected = 'selected="selected"';
-                break;
-            }
-        }
-        $options .= "<option ".$selected." value=".$key." >".$value."</option>";
-    }
+    // $options = '';
+    // foreach ($products as $key => $value) {
+    //     # code...
+    //     $selected = '';
+    //     foreach($cell['products'] as $k => $v){
+    //         if($v['id'] == $key){
+    //             $selected = 'selected="selected"';
+    //             break;
+    //         }
+    //     }
+    //     $options .= "<option ".$selected." value=".$key." >".$value."</option>";
+    // }
     ?>
     <fieldset>
         <legend><?= __('Edit Cell') ?></legend>
@@ -40,19 +40,37 @@
             echo $this->Form->control('rack_row_id', ['options' => $rackRows]);
             echo $this->Form->control('cell_code');
             // echo $this->Form->control(
-            //     'products._ids',
+            //     'Products',
             //     [
             //         'options' => $products,
+            //         'data-search' => true,
+            //         'data-silent-initial-value-set' => true,
+            //         'maxlength' => "255",
             //     ]
             // ); 
+            echo $this->Form->control('Products', 
+                [
+                    'type' => 'select',
+                    'options' => $products,
+                    'multiple' => true,
+                    'required' => true,
+                    'label' => true,
+                    'id' => 'Products',
+                    'placeholder' => 'Products',
+                    'data-search' => 'true',
+                    'data-silent-initial-value-set' => true,
+                    'maxlength' => 255,
+                ]
+            );
+            
             ?>
-            <div class="mb-3 text required">
+            <!-- <div class="mb-3 text required">
                 <label class="form-label" for="products">Products</label>
                 <br/>
                 <select required="required" id="Products" multiple name="Products" placeholder="Products" data-search="true" data-silent-initial-value-set="true"  maxlength="255">
                     <?= $options; ?>
                 </select>
-            </div>
+            </div> -->
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>
     <?= $this->Form->end() ?>

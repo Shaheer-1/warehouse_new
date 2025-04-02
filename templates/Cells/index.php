@@ -108,6 +108,7 @@
             <?php 
             }
             }else{
+                $url = $this->Url->build($this->getRequest()->getPath(), ['fullBase' => true]).'/cellinfo/'.$cell->id;
             ?>
             <tr>
                 <!-- <td></td> -->

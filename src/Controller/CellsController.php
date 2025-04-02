@@ -175,7 +175,7 @@ class CellsController extends AppController
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $dataSet = $this->request->getData();
-            $dataSet['products']['_ids'] = explode(",",$this->request->getData()['Products']);
+            $dataSet['products']['_ids'] = $this->request->getData()['Products'];
             $cell = $this->Cells->patchEntity($cell, $dataSet);
             $cell->is_edit = 'edit';
             if ($this->Cells->save($cell)) {
