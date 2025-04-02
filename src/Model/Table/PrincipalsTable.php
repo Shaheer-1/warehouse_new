@@ -49,6 +49,8 @@ class PrincipalsTable extends Table
 
         $this->hasMany('Products', [
             'foreignKey' => 'principal_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
     }
 

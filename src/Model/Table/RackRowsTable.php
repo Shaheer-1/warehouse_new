@@ -49,6 +49,8 @@ class RackRowsTable extends Table
 
         $this->hasMany('Cells', [
             'foreignKey' => 'rack_row_id',
+            'dependent' => true,
+            'cascadeCallbacks' => true,
         ]);
     }
 
