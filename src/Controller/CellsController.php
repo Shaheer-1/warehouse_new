@@ -13,9 +13,6 @@ namespace App\Controller;
  */
 class CellsController extends AppController
 {
-    // protected array $paginate = [
-    //     'maxLimit' => 1000
-    // ];
     public function initialize(): void
     {
         parent::initialize();
