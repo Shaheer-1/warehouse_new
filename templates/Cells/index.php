@@ -52,7 +52,7 @@
             <?php
             if($cell->products ){
                 foreach ($cell->products as $key => $value) { 
-                    $url = $this->Url->build($this->getRequest()->getPath(), ['fullBase' => true]).'/cellinfo/'.$cell->id;
+                    $url = $this->Url->build($this->getRequest()->getPath(), ['fullBase' => true]).'Cells/cellinfo/'.$cell->id;
                 ?>
             <tr>
                 <!-- <td>
@@ -108,7 +108,7 @@
             <?php 
             }
             }else{
-                $url = $this->Url->build($this->getRequest()->getPath(), ['fullBase' => true]).'/cellinfo/'.$cell->id;
+                $url = $this->Url->build($this->getRequest()->getPath(), ['fullBase' => true]).'Cells/cellinfo/'.$cell->id;
             ?>
             <tr>
                 <!-- <td></td> -->

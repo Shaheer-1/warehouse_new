@@ -25,16 +25,19 @@ class CellsController extends AppController
      */
     public function index()
     {
+        
         $query = $this->Cells
         ->find()
         ->contain([
             'RackRows',
-            'Products'=> ['Principals']
+            'Products'=> ['Principals'],
         ]);
-
-        $cells = $this->paginate($query, [
-            'limit' => 1000, // Set your limit here
-        ]);
+        
+        $this->paginate = [
+            'limit' => 1000, // Default items per page
+            'maxLimit' => 1000 // Maximum limit allowed
+        ];
+        $cells = $this->paginate($query);
         $this->set(compact('cells'));
     }
 
