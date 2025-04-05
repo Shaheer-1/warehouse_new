@@ -26,7 +26,7 @@
     </thead>
     <tbody>
         <?php foreach ($rackRows as $rackRow) : 
-            $url = $this->Url->build($this->getRequest()->getPath(), ['fullBase' => true]).'/rowinfo/'.$rackRow->id;
+            $url = $this->Url->build($this->getRequest()->getPath(), ['fullBase' => true]).'RackRows/rowinfo/'.$rackRow->id;
             $modalInfo = h($rackRow->row_code);
         ?>
         <tr>
