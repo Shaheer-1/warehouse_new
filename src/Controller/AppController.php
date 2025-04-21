@@ -43,18 +43,7 @@ class AppController extends Controller
 
         $this->loadComponent('Flash');
 
-        // Load the Authentication component
-        // $this->loadComponent('Authentication.Authentication', [
-        //     'requireIdentity' => true, // Require authentication by default
-        //     'unauthenticatedRedirect' => '/users/login', // Redirect to login page if not authenticated
-        //     'loginAction' => [
-        //         'plugin' => 'CakeDC/Users',
-        //         'controller' => 'Users',
-        //         'action' => 'login',
-        //     ],
-        // ]);
-        // Allow specific actions to be public
-        // $this->Authentication->allowUnauthenticated(['publicAction1', 'publicAction2']);
+        
 
 
         /*
@@ -85,9 +74,33 @@ class AppController extends Controller
              * You could use '*' to match anything
              * Suggestion: put your rules into a specific config file
              */
-            'permissions' => [], // you could set an array of permissions or load them using a file 'autoload_config'
+            'permissions' => [
+                'role' => '*',
+                'controller' => 'Cells',
+                'action' => 'cellinfo',
+                'allowed' => true,
+            ], // you could set an array of permissions or load them using a file 'autoload_config'
             // log will default to the 'debug' value, matched rbac rules will be logged in debug.log by default when debug enabled
-            'log' => false,
+            'log' => true,
         ];
+    }
+    public function beforeFilter(\Cake\Event\EventInterface $event)
+    {
+        parent::beforeFilter($event);
+        // for all controllers in our application, make index and view
+        // actions public, skipping the authentication check
+        // Load the Authentication component
+        // $this->loadComponent('Authentication.Authentication', [
+        //     'requireIdentity' => true,
+        //     'unauthenticatedRedirect' => '/users/login',
+        //     'loginAction' => [
+        //         'plugin' => 'CakeDC/Users',
+        //         'controller' => 'Users',
+        //         'action' => 'login',
+        //     ],
+        // ]);
+        // Allow specific actions to be public
+        // $this->Authentication->allowUnauthenticated(['cellinfo']);
+        // $this->Authentication->addUnauthenticatedActions(['cellinfo']);
     }
 }
