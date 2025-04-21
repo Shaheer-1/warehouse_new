@@ -74,12 +74,7 @@ class AppController extends Controller
              * You could use '*' to match anything
              * Suggestion: put your rules into a specific config file
              */
-            'permissions' => [
-                'role' => '*',
-                'controller' => 'Cells',
-                'action' => 'cellinfo',
-                'allowed' => true,
-            ], // you could set an array of permissions or load them using a file 'autoload_config'
+            'permissions' => [], // you could set an array of permissions or load them using a file 'autoload_config'
             // log will default to the 'debug' value, matched rbac rules will be logged in debug.log by default when debug enabled
             'log' => true,
         ];
