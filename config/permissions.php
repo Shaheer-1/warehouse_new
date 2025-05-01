@@ -23,5 +23,11 @@ return [
             'action' => 'cellinfo',
             'bypassAuth' => true,
         ],
+        [
+            'role' => '*',
+            'controller' => 'RackRows',
+            'action' => 'rowinfo',
+            'bypassAuth' => true,
+        ],
     ],
 ];
