@@ -40,10 +40,7 @@ class RackRowsController extends AppController
     {
         $rackRow = $this->RackRows->get($id, contain: [
             'Cells' => ['Products'=> ['Principals']],
-            // 'Products'=> ['Principals'],
         ]);
-        // pr($rackRow);
-        // exit;
         $this->set(compact('rackRow'));
     }
 
