@@ -39,8 +39,11 @@ class RackRowsController extends AppController
     public function rowinfo($id = null)
     {
         $rackRow = $this->RackRows->get($id, contain: [
-            'Cells'
+            'Cells' => ['Products'=> ['Principals']],
+            // 'Products'=> ['Principals'],
         ]);
+        // pr($rackRow);
+        // exit;
         $this->set(compact('rackRow'));
     }
 

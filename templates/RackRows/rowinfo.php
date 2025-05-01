@@ -28,10 +28,10 @@
                 <th scope="row"><?= __('Row Code') ?></th>
                 <td><?= h($rackRow->row_code) ?></td>
             </tr>
-            <tr>
+            <!-- <tr>
                 <th scope="row"><?= __('Created At') ?></th>
                 <td><?= h($rackRow->created) ?></td>
-            </tr>
+            </tr> -->
             <!-- <tr>
                 <th scope="row"><?= __('Modified') ?></th>
                 <td><?= h($rackRow->modified) ?></td>
@@ -39,7 +39,7 @@
         </table>
     </div>
     <div class="related">
-        <h4><?= __('Related Cells') ?></h4>
+        <h4><?= __('Related Cells & Products') ?></h4>
         <?php if (!empty($rackRow->cells)): ?>
         <div class="table-responsive">
             <table class="table table-striped">
@@ -47,17 +47,25 @@
                     <!-- <th scope="col"><?= __('Id') ?></th> -->
                     <!-- <th scope="col"><?= __('Rack Row Id') ?></th> -->
                     <th scope="col"><?= __('Cell Code') ?></th>
-                    <th scope="col"><?= __('Created') ?></th>
-                    <th scope="col"><?= __('Modified') ?></th>
+                    <th scope="col"><?= __('Principal') ?></th>
+                    <th scope="col"><?= __('SKU') ?></th>
+                    <th scope="col"><?= __('Product Details') ?></th>
                 </tr>
                 <?php foreach ($rackRow->cells as $cells): ?>
+                    <?php foreach ($cells->products as $products): ?>
                 <tr>
+                <?php
+                // pr($products);exit;
+                ?>
+                    
                     <!-- <td><?= h($cells->id) ?></td> -->
                     <!-- <td><?= h($cells->rack_row_id) ?></td> -->
                     <td><?= h($cells->cell_code) ?></td>
-                    <td><?= h($cells->created) ?></td>
-                    <td><?= h($cells->modified) ?></td>
+                    <td><?= h($products->principal->principal_name) ?></td>
+                    <td><?= h($products->sku) ?></td>
+                    <td><?= h($products->product_details) ?></td>
                 </tr>
+                <?php endforeach; ?>
                 <?php endforeach; ?>
             </table>
         </div>
