@@ -38,9 +38,15 @@ class RackRowsController extends AppController
     }
     public function rowinfo($id = null)
     {
-        $rackRow = $this->RackRows->get($id, contain: [
-            'Cells' => ['Products'=> ['Principals']],
-        ]);
+        $rackRow = $this->RackRows->find()
+        ->where(['RackRows.id' => $id])
+        ->contain([
+            'Cells' => function ($query) {
+                return $query->order(['Cells.cell_code' => 'ASC']); // Sorting Cells by cell_code
+            },
+            'Cells.Products' => ['Principals']
+        ])
+        ->first();
         $this->set(compact('rackRow'));
     }
 
